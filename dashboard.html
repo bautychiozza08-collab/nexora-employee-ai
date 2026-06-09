@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard | Nexora Employee AI</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header class="navbar">
+  <div class="logo">
+    <div class="logo-icon">N</div>
+    <div>
+      <h2>NEXORA</h2>
+      <span>Employee AI</span>
+    </div>
+  </div>
+
+  <nav>
+    <a href="index.html">Inicio</a>
+    <a href="#">Leads</a>
+    <a href="settings.html">Negocio</a>
+  </nav>
+
+  <button class="nav-btn">Dashboard</button>
+</header>
+
+<section class="dashboard">
+  <div class="dashboard-header">
+    <div>
+      <span class="badge">● Panel del dueño</span>
+      <h1>Leads capturados por tu empleado IA</h1>
+      <p>Visualizá clientes interesados, prioridad y resumen automático.</p>
+    </div>
+
+    <button class="primary-btn" onclick="createDemoLead()">+ Lead demo</button>
+  </div>
+
+<div class="top-lead-card" id="topLeadCard">
+  <div>
+    <span class="top-label">🔥 Lead más caliente hoy</span>
+    <h2 id="topLeadName">Sin leads todavía</h2>
+    <p id="topLeadNeed">Cuando entre un lead fuerte, aparecerá acá.</p>
+  </div>
+
+  <div class="top-score">
+    <span>Score</span>
+    <strong id="topLeadScore">0/100</strong>
+  </div>
+</div>
+
+
+<div class="employee-status-card">
+
+  <div class="employee-left">
+    <span class="top-label">🧠 Estado del Empleado IA</span>
+
+    <h2 id="employeeBusiness">
+      Sin negocio configurado
+    </h2>
+
+    <p id="employeeStatusText">
+      Configurá tu negocio para comenzar.
+    </p>
+  </div>
+
+  <div class="employee-grid">
+
+    <div class="employee-mini">
+      <span>Servicios</span>
+      <strong id="servicesCount">0</strong>
+    </div>
+
+    <div class="employee-mini">
+      <span>Precios</span>
+      <strong id="pricesCount">0</strong>
+    </div>
+
+    <div class="employee-mini">
+      <span>Nivel IA</span>
+      <strong id="trainingLevel">0%</strong>
+    </div>
+
+    <div class="employee-mini">
+      <span>Estado</span>
+      <strong id="employeeState">🔴 Inactivo</strong>
+    </div>
+
+  </div>
+
+</div>
+
+  <div class="dashboard-stats">
+    <div class="metric-card">
+      <span>Total leads</span>
+      <h3 id="totalLeads">0</h3>
+      <p>Capturados</p>
+    </div>
+
+    <div class="metric-card">
+      <span>Calientes</span>
+      <h3 id="hotLeads">0</h3>
+      <p>Alta intención</p>
+    </div>
+
+    <div class="metric-card">
+      <span>Tibios</span>
+      <h3 id="warmLeads">0</h3>
+      <p>Interés medio</p>
+    </div>
+
+    <div class="metric-card">
+      <span>Fríos</span>
+      <h3 id="coldLeads">0</h3>
+      <p>Bajo interés</p>
+    </div>
+  </div>
+
+  <div class="leads-panel">
+    <div class="leads-top">
+      <h2>Clientes detectados</h2>
+      <button class="secondary-btn" onclick="clearLeads()">Limpiar</button>
+    </div>
+
+    <div id="leadsList" class="leads-list"></div>
+  </div>
+</section>
+
+<script src="dashboard.js"></script>
+</body>
+</html>

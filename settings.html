@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Negocio | Nexora Employee AI</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header class="navbar">
+  <div class="logo">
+    <div class="logo-icon">N</div>
+    <div>
+      <h2>NEXORA</h2>
+      <span>Employee AI</span>
+    </div>
+  </div>
+
+  <nav>
+    <a href="index.html">Inicio</a>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="settings.html">Negocio</a>
+  </nav>
+
+  <button class="nav-btn">Configurar</button>
+</header>
+
+<section class="settings-page">
+  <div class="settings-header">
+    <span class="badge">● Cerebro del empleado IA</span>
+    <h1>Configurá tu negocio</h1>
+    <p>Estos datos van a entrenar al empleado IA para responder como si trabajara para tu marca.</p>
+  </div>
+
+  <div class="settings-layout">
+    <form class="settings-card" onsubmit="saveBusiness(event)">
+      <label>Nombre del negocio</label>
+      <input id="businessName" type="text" placeholder="Ej: Barbería Black Cut">
+
+      <label>Rubro</label>
+      <input id="businessType" type="text" placeholder="Ej: Barbería, restaurante, tienda">
+
+      <label>Servicios o productos</label>
+      <textarea id="businessServices" placeholder="Ej: Corte, barba, color, menú digital, productos..."></textarea>
+
+      <label>Precios</label>
+      <textarea id="businessPrices" placeholder="Ej: Corte $8000, barba $5000"></textarea>
+
+      <label>Horarios</label>
+      <input id="businessHours" type="text" placeholder="Ej: Lunes a sábado de 10 a 20">
+
+      <label>WhatsApp</label>
+      <input id="businessWhatsapp" type="text" placeholder="Ej: 11 2345-6789">
+
+      <label>Tono de atención</label>
+      <select id="businessTone">
+        <option value="cercano">Cercano y amable</option>
+        <option value="profesional">Profesional</option>
+        <option value="vendedor">Vendedor y directo</option>
+        <option value="premium">Premium y elegante</option>
+      </select>
+
+      <button class="primary-btn" type="submit">Guardar negocio</button>
+    </form>
+
+    <div class="business-preview">
+      <span class="top-label">Vista previa IA</span>
+      <h2 id="previewName">Tu negocio</h2>
+      <p id="previewType">Rubro todavía no configurado.</p>
+
+      <div class="preview-box">
+        <strong>Cómo respondería tu empleado IA:</strong>
+        <p id="previewText">
+          Hola 👋 Soy el empleado IA de tu negocio. Cargá la información para que pueda responder mejor a tus clientes.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="settings.js"></script>
+</body>
+</html>

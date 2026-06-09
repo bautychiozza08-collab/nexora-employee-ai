@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nexora Employee AI</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="logo">
+      <div class="logo-icon">N</div>
+      <div>
+        <h2>NEXORA</h2>
+        <span>Employee AI</span>
+      </div>
+    </div>
+
+    <nav>
+      <a href="#">Producto</a>
+      <a href="#">Funciones</a>
+      <a href="dashboard.html">Dashboard</a>
+    </nav>
+
+    <button class="nav-btn">Probar demo</button>
+  </header>
+
+  <main class="hero">
+    <section class="hero-text">
+      <div class="badge">● Tu próximo empleado no duerme</div>
+
+      <h1>
+        Contratá un <span>empleado IA</span><br>
+        por menos que un café por día.
+      </h1>
+
+      <p>
+        Responde clientes, califica leads y agenda reuniones automáticamente.
+        Trabaja 24/7 para que no pierdas ninguna oportunidad.
+      </p>
+
+      <div class="hero-buttons">
+        <button class="primary-btn" onclick="scrollToChat()">Probar ahora →</button>
+        <button class="secondary-btn">Ver cómo funciona</button>
+      </div>
+
+      <div class="mini-stats">
+        <div><strong>24/7</strong><span>Online</span></div>
+        <div><strong>5 seg</strong><span>Respuesta</span></div>
+        <div><strong>+ Leads</strong><span>Automático</span></div>
+      </div>
+    </section>
+
+    <section class="hero-panel">
+      <div class="metric-card">
+        <span>Leads de hoy</span>
+        <h3>28</h3>
+        <p>+35% vs ayer</p>
+      </div>
+
+      <div class="metric-card hot">
+        <span>Leads calientes</span>
+        <h3>12</h3>
+        <p>Alta intención</p>
+      </div>
+
+      <div class="chat-preview">
+        <div class="chat-header">
+          <span>Chat en vivo</span>
+          <div class="online-dot"></div>
+        </div>
+
+        <div class="bubble user">Hola, ¿cuánto cuesta una web?</div>
+        <div class="bubble bot">
+          Hola 👋 Una web puede variar según lo que necesites.
+          ¿Querés contarme para qué negocio sería?
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <section class="features">
+    <h2>Todo lo que un empleado debería hacer. <span>Y más.</span></h2>
+
+    <div class="feature-grid">
+      <div class="feature-card">
+        <h3>⚡ Responde al instante</h3>
+        <p>Atiende consultas automáticamente en segundos.</p>
+      </div>
+
+      <div class="feature-card">
+        <h3>⭐ Califica leads</h3>
+        <p>Detecta si un cliente está frío, tibio o caliente.</p>
+      </div>
+
+      <div class="feature-card">
+        <h3>📅 Agenda reuniones</h3>
+        <p>Evita idas y vueltas con tus potenciales clientes.</p>
+      </div>
+
+      <div class="feature-card">
+        <h3>🔁 Hace seguimiento</h3>
+        <p>No deja que ningún cliente interesado se enfríe.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="chat-section" id="chat-section">
+    <div class="chat-box">
+      <div class="chat-title">
+        <h2>Probá tu empleado IA</h2>
+        <p>Escribile como si fueras un cliente interesado.</p>
+      </div>
+
+      <div id="chatMessages" class="chat-messages">
+        <div class="message bot-message" id="welcomeMessage">
+  Hola 👋 Soy el empleado IA. ¿Cómo te llamás?
+</div>
+        </div>
+      </div>
+
+      <div class="chat-input">
+        <input type="text" id="userInput" placeholder="Escribí tu mensaje..." />
+        <button onclick="sendMessage()">Enviar</button>
+      </div>
+    </div>
+  </section>
+
+  <div id="leadToast" class="lead-toast">
+  🔔 Nuevo lead caliente detectado
+</div>
+
+<div id="vipLeadAlert" class="vip-lead-alert">
+
+  <div class="vip-icon">🔥</div>
+
+  <h2>LEAD VIP DETECTADO</h2>
+
+  <p id="vipLeadText">
+    Cliente con intención de compra muy alta.
+  </p>
+
+</div>
+
+  <script src="app.js"></script>
+</body>
+</html>
