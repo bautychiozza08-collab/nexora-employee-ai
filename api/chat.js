@@ -1,58 +1,45 @@
 export default async function handler(req, res) {
   if (req.method !== "POST") {
-    return res.status(405).json({ error: "Método no permitido" });
+    return res.status(405).json({
+      error: "Método no permitido"
+    });
   }
 
+  const { message, business } = req.body;
+
   try {
-    const { message, business } = req.body;
-
     const prompt = `
-Sos un empleado virtual de este negocio.
+Sos el empleado virtual de este negocio:
 
-NEGOCIO:
-${business?.name || "No definido"}
-
-RUBRO:
-${business?.type || "No definido"}
-
-SERVICIOS:
-${business?.services || "No definidos"}
-
-PRECIOS:
-${business?.prices || "No definidos"}
-
-HORARIOS:
-${business?.hours || "No definidos"}
-
-WHATSAPP:
-${business?.whatsapp || "No definido"}
-
-TONO:
-${business?.tone || "cercano"}
-
-Reglas:
-- Respondé como empleado del negocio.
-- No digas que sos ChatGPT.
-- Sé breve, claro y vendedor.
-- Si el cliente muestra interés, intentá pedir WhatsApp.
-- Si pide turno, guiá la reserva.
+Nombre: ${business.name}
+Servicios: ${business.services}
+Precios: ${business.prices}
+Horarios: ${business.hours}
+WhatsApp: ${business.whatsapp}
+Tono: ${business.tone}
 
 Cliente:
 ${message}
+
+Respondé como un empleado humano real.
 `;
 
     const response = await fetch(
-      "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent",
+      "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=" +
+      process.env.GEMINI_API_KEY,
       {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
-          "x-goog-api-key": process.env.GEMINI_API_KEY
+          "Content-Type": "application/json"
         },
         body: JSON.stringify({
           contents: [
             {
-              parts: [{ text: prompt }]
+              parts: [
+                {
+                  text: prompt
+                }
+              ]
             }
           ]
         })
@@ -62,11 +49,16 @@ ${message}
     const data = await response.json();
 
     const reply =
-      data?.candidates?.[0]?.content?.parts?.[0]?.text ||
-      "Perdón, no pude responder ahora.";
+      data.candidates?.[0]?.content?.parts?.[0]?.text ||
+      "No pude generar una respuesta.";
 
-    res.status(200).json({ reply });
+    res.status(200).json({
+      reply
+    });
+
   } catch (error) {
-    res.status(500).json({ error: "Error conectando con Gemini" });
+    res.status(500).json({
+      error: error.message
+    });
   }
 }
