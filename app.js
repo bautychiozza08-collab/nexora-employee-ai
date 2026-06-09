@@ -346,7 +346,10 @@ async function sendMessage() {
 
   detectName(message);
 
-  conversation.push({ role: "user", content: message });
+  conversation.push({
+    role: "user",
+    content: message
+  });
 
   const loadingMessage = document.createElement("div");
   loadingMessage.className = "message bot-message";
@@ -354,44 +357,44 @@ async function sendMessage() {
   chatMessages.appendChild(loadingMessage);
   chatMessages.scrollTop = chatMessages.scrollHeight;
 
-  setTimeout(() => {
-    loadingMessage.remove();
+  let response = "";
 
-   let response = "";
+  try {
+    const aiRes = await fetch("https://nexora-employee-ai.vercel.app/api/chat", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        message: message,
+        business: getBusiness()
+      })
+    });
 
-try {
-  const aiRes = await fetch("https://nexora-employee-ai.vercel.app/api/chat", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      message: message,
-      business: getBusiness()
-    })
+    const data = await aiRes.json();
+
+    response =
+      data.reply ||
+      generateBusinessMemoryResponse(message) ||
+      "Entiendo 👍 Contame un poco más.";
+
+  } catch (error) {
+    response =
+      generateBusinessMemoryResponse(message) ||
+      "Entiendo 👍 Contame un poco más.";
+  }
+
+  loadingMessage.remove();
+
+  addMessage(response, "bot");
+
+  conversation.push({
+    role: "assistant",
+    content: response
   });
 
-  const data = await aiRes.json();
-
-  response =
-    data.reply ||
-    generateBusinessMemoryResponse(message) ||
-    "Entiendo 👍 Contame un poco más.";
-} catch (error) {
-  response =
-    generateBusinessMemoryResponse(message) ||
-    "Entiendo 👍 Contame un poco más.";
-}
-
-    addMessage(response, "bot");
-    conversation.push({ role: "assistant", content: response });
-
-    if (!conversationState.servicio && !conversationState.fecha && !conversationState.whatsapp) {
   createLeadIfNeeded(message);
 }
-  }, 800);
-}
-
 userInput.addEventListener("keydown", function (event) {
   if (event.key === "Enter") sendMessage();
 });
