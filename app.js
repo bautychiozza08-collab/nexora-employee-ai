@@ -357,9 +357,31 @@ async function sendMessage() {
   setTimeout(() => {
     loadingMessage.remove();
 
-    const response =
-      generateBusinessMemoryResponse(message) ||
-      "Entiendo 👍 Contame un poco más para poder ayudarte mejor.";
+   let response = "";
+
+try {
+  const aiRes = await fetch("https://nexora-employee-ai.vercel.app/api/chat", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      message: message,
+      business: getBusiness()
+    })
+  });
+
+  const data = await aiRes.json();
+
+  response =
+    data.reply ||
+    generateBusinessMemoryResponse(message) ||
+    "Entiendo 👍 Contame un poco más.";
+} catch (error) {
+  response =
+    generateBusinessMemoryResponse(message) ||
+    "Entiendo 👍 Contame un poco más.";
+}
 
     addMessage(response, "bot");
     conversation.push({ role: "assistant", content: response });
