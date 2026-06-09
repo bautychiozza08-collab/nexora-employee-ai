@@ -48,9 +48,11 @@ Respondé como un empleado humano real.
 
     const data = await response.json();
 
-    const reply =
-      data.candidates?.[0]?.content?.parts?.[0]?.text ||
-      "No pude generar una respuesta.";
+console.log(data);
+
+const reply =
+  data?.candidates?.[0]?.content?.parts?.[0]?.text ||
+  JSON.stringify(data);
 
     res.status(200).json({
       reply
