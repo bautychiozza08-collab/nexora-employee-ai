@@ -365,10 +365,11 @@ async function sendMessage() {
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({
-        message: message,
-        business: getBusiness()
-      })
+    body: JSON.stringify({
+  message: message,
+  business: getBusiness(),
+  conversation: conversation.slice(-8)
+})
     });
 
     const data = await aiRes.json();

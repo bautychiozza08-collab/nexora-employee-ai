@@ -8,6 +8,11 @@ export default async function handler(req, res) {
   const { message, business } = req.body;
 
   try {
+
+    const history = (req.body.conversation || [])
+  .map(item => `${item.role}: ${item.content}`)
+  .join("\n");
+
     const prompt = `
 Sos un vendedor profesional de Nexora.
 
@@ -33,6 +38,9 @@ Servicios: ${business.services}
 Precios: ${business.prices}
 Horarios: ${business.hours}
 WhatsApp: ${business.whatsapp}
+
+Historial reciente:
+${history || "Sin historial previo"}
 
 Mensaje del cliente:
 ${message}
